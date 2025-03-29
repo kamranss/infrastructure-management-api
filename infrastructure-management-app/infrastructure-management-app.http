@@ -1,0 +1,6 @@
+@infrastructure_management_app_HostAddress = http://localhost:5275
+
+GET {{infrastructure_management_app_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

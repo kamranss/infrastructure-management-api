@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "p3ZnGYwY39E7XXTlVVvNVY1IPfIhmR+Cuwle7TdZLiw=",
+  "Source": "infrastructure-management-app",
+  "BasePath": "_content/infrastructure-management-app",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

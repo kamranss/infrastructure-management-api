@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\infrastructure-management-app.props" />
+</Project>
