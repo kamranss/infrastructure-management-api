@@ -723,11 +723,11 @@ namespace Persistence.Services
         }   // done
 
 
-        public async Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid)
+        public async Task<IServiceResult<EquipmentAndMpDto>> AddMptoEquipment(int? equipmentId, int? Mpid)
         {
             if (equipmentId == null || equipmentId <= 0 || Mpid == null || Mpid <= 0)
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "params are wrong" };
+                return new ServiceResult<EquipmentAndMpDto> { IsSuccess = false, ErrorMessage = "params are wrong" };
             }
 
             // Retrieve the Equipment and MaintenancePlan entities
@@ -737,20 +737,20 @@ namespace Persistence.Services
 
             if (equipment == null)
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                return new ServiceResult<EquipmentAndMpDto> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
 
             var maintenancePlan = await _readRepository.GetWhere(mp => mp.Id == Mpid).FirstOrDefaultAsync();
 
             if (maintenancePlan == null)
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no MaintenancePlan in DB" };
+                return new ServiceResult<EquipmentAndMpDto> { IsSuccess = false, ErrorMessage = "There is no MaintenancePlan in DB" };
             }
 
             // Check if the MaintenancePlan is already associated with the Equipment
             if (equipment.MaintenancePlan.Contains(maintenancePlan))
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Equipment already has this MaintenancePlan" };
+                return new ServiceResult<EquipmentAndMpDto> { IsSuccess = false, ErrorMessage = "Equipment already has this MaintenancePlan" };
             }
 
             // Associate the MaintenancePlan with the Equipment (EF Core will handle the insertion into the junction table)
@@ -764,18 +764,18 @@ namespace Persistence.Services
             {
                 // Handle exceptions if necessary
                 Console.WriteLine(ex);
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
+                return new ServiceResult<EquipmentAndMpDto> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
             }
 
             // Create a result object or perform additional actions as needed
-            var equipmentAndMp = new EquipmentAndMp
+            var equipmentAndMp = new EquipmentAndMpDto
             {
                 EquipmentId = equipmentId,
                 MpId = Mpid,
                 EquipmentName = equipment.Name,
             };
 
-            return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data = equipmentAndMp };
+            return new ServiceResult<EquipmentAndMpDto> { IsSuccess = true, Data = equipmentAndMp };
 
         }
 
@@ -809,11 +809,11 @@ namespace Persistence.Services
             }
         }
 
-        public async Task<IServiceResult<EquipmentAndPart>> AddParttoEquipment(int? equipmentId, int? partId)
+        public async Task<IServiceResult<EquipmentAndPartDtoDto>> AddParttoEquipment(int? equipmentId, int? partId)
         {
             if (equipmentId == null || equipmentId <= 0 || partId == null || partId <= 0)
             {
-                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "params are wrong" };
+                return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = false, ErrorMessage = "params are wrong" };
             }
 
             // Retrieve the Equipment and MaintenancePlan entities
@@ -823,20 +823,20 @@ namespace Persistence.Services
 
             if (equipment == null)
             {
-                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
 
             var part = await _partReadRepository.GetWhere(p => p.Id == partId).FirstOrDefaultAsync();
 
             if (part == null)
             {
-                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "There is no part in DB" };
+                return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = false, ErrorMessage = "There is no part in DB" };
             }
 
             // Check if the MaintenancePlan is already associated with the Equipment
             if (equipment.Part.Contains(part))
             {
-                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "Equipment already has this part" };
+                return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = false, ErrorMessage = "Equipment already has this part" };
             }
 
             // Associate the MaintenancePlan with the Equipment (EF Core will handle the insertion into the junction table)
@@ -850,11 +850,11 @@ namespace Persistence.Services
             {
                 // Handle exceptions if necessary
                 Console.WriteLine(ex);
-                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
+                return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
             }
 
             // Create a result object or perform additional actions as needed
-            var equipmentAndpart = new EquipmentAndPart
+            var equipmentAndpart = new EquipmentAndPartDtoDto
             {
                 EquipmentId = equipmentId,
                 PartId = partId,
@@ -862,7 +862,7 @@ namespace Persistence.Services
                 PartName = part.Name,
             };
 
-            return new ServiceResult<EquipmentAndPart> { IsSuccess = true, Data = equipmentAndpart };
+            return new ServiceResult<EquipmentAndPartDtoDto> { IsSuccess = true, Data = equipmentAndpart };
         }
     }
 }

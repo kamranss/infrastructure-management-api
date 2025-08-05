@@ -49,9 +49,9 @@ namespace Application.Abstraction.Services
 
         Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id);
 
-        Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid);
+        Task<IServiceResult<EquipmentAndMpDto>> AddMptoEquipment(int? equipmentId, int? Mpid);
 
-        Task<IServiceResult<EquipmentAndPart>> AddParttoEquipment(int? equipmentId, int? partId);
+        Task<IServiceResult<EquipmentAndPartDtoDto>> AddParttoEquipment(int? equipmentId, int? partId);
 
         Task<IServiceResult<List<EquipmentInputDto>>> GetEquipmentsForInput(string? name);
 

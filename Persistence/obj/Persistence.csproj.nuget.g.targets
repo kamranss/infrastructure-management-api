@@ -21,5 +21,6 @@
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.diagnostics.abstractions\9.0.0\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Diagnostics.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.diagnostics.abstractions\9.0.0\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Diagnostics.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.hosting.abstractions\9.0.0\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Hosting.Abstractions.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.hosting.abstractions\9.0.0\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Hosting.Abstractions.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.extensions.http\9.0.2\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Http.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.http\9.0.2\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Http.targets')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.configuration\9.0.2\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Configuration.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.configuration\9.0.2\buildTransitive\netcoreapp2.0\Microsoft.Extensions.Configuration.targets')" />
   </ImportGroup>
 </Project>

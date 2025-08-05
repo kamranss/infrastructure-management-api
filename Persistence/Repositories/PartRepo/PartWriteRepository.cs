@@ -1,4 +1,4 @@
-﻿using Application.Repositories.EquipmentPartRepo;
+﻿using Application.Repositories.PartRepo;
 using Domain.Entities;
 using Persistence.Context;
 using System;

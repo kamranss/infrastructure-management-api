@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("4ba533d1-af8c-4888-994b-3fa32261afce")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("infrastructure-management-app")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d2462521c89d9cd9f8f42273b93eabc7b342556e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85949c941d0d6ba4bdd8ea8472ae8b5908ef4771")]
 [assembly: System.Reflection.AssemblyProductAttribute("infrastructure-management-app")]
 [assembly: System.Reflection.AssemblyTitleAttribute("infrastructure-management-app")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

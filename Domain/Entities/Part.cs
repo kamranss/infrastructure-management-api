@@ -12,7 +12,7 @@ namespace Domain.Entities
         public string? Code { get; set; }
         public string? Name { get; set; }
         public List<Equipment>? Equipments { get; set; }
-        //public int Quantity { get; set; }
-        //public int ? ReorderLimit { get; set; }
+        public int Quantity { get; set; } = 0;
+        public int? ReorderLimit { get; set; } = null;
     }
 }

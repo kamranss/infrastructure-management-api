@@ -4,12 +4,12 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using Persistence.Configuration;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
@@ -35,13 +35,15 @@ namespace Persistence.Context
         public DbSet<MaintenanceSetting> MaintenanceSettings { get; set; }
         //public DbSet<EquipmentMaintenancePlan> EquipmentMaintenancePlans { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(DbConfiguration.ConnectionString, b => b.MigrationsAssembly("MaintenanceWebApi"));
-            }
-        }
+
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseNpgsql(DbConfiguration.ConnectionString, b => b.MigrationsAssembly("infrastructure_management_app"));
+        //    }
+        //}
 
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -73,21 +75,22 @@ namespace Persistence.Context
             modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();
             // Seed data for departments
 
+
             modelBuilder.Entity<Department>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
                     new Department { Id = 1, Name = "Planning", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
                     new Department { Id = 2, Name = "Takelaj", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 4, Name = "Electrical", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 5, Name = "MarineFleet", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 6, Name = "Mechanical", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 7, Name = "Cranes", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System"  , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 8, Name = "Railway", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 9, Name = "Transport", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
-                    new Department { Id = 10, Name = "Engineering", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1" , Description = "Unknown" },
-                    new Department { Id = 11, Name = "Berth", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1" , Description = "Unknown" }
+                    new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 4, Name = "Electrical", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 5, Name = "MarineFleet", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 6, Name = "Mechanical", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 7, Name = "Cranes", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 8, Name = "Railway", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 9, Name = "Transport", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 10, Name = "Engineering", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 11, Name = "Berth", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" }
 
                 );
             });
@@ -96,7 +99,7 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new OperationSite { Id = 1, Name = "Building_1", IsDeleted = false, IsActive = true, DepartmentId=1, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new OperationSite { Id = 1, Name = "Building_1", IsDeleted = false, IsActive = true, DepartmentId = 1, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new OperationSite { Id = 2, Name = "Building_2", IsDeleted = false, IsActive = true, DepartmentId = 1, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new OperationSite { Id = 3, Name = "OperationArea_1", IsDeleted = false, IsActive = true, DepartmentId = 1, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new OperationSite { Id = 4, Name = "WareHause_1", IsDeleted = false, IsActive = true, DepartmentId = 5, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
@@ -123,7 +126,7 @@ namespace Persistence.Context
                     new EquipmentType { Id = 5, Name = "Forklift 20", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new EquipmentType { Id = 6, Name = "Reach Stacker 45", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new EquipmentType { Id = 7, Name = "Portal Crane 80T", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 8, Name = "Portal Crane 40T", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },                  
+                    new EquipmentType { Id = 8, Name = "Portal Crane 40T", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new EquipmentType { Id = 9, Name = "Loader 25", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new EquipmentType { Id = 10, Name = "GC_Berth", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new EquipmentType { Id = 11, Name = "Ferry_Berth", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
@@ -161,34 +164,34 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new EquipmentType { Id = 1, Name = "Single leg chain sling", IsDeleted = false, IsActive = true, CreatedDate=DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 2, Name = "Working platform", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 3, Name = "Hangcha", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 4, Name = "XCMG", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 5, Name = "Kalmar", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 6, Name = "Terberq", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 7, Name = "Sisu", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 8, Name = "Toyoto", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 9, Name = "Bobkat", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 10, Name = "Hyster", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 11, Name = "Boss", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 12, Name = "Ardelt", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 13, Name = "None", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 14, Name = "VDL", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 15, Name = "Sunny", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 16, Name = "Camry", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 17, Name = "Engine", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 18, Name = "023-2 №-li dizel generator", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 19, Name = "022-1 №-li dizel generator", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 20, Name = "021-TQM 23 B48-754", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 21, Name = "Service berth-N4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 22, Name = "Molino", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 23, Name = "Service berth-N3 ", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 24, Name = "Shackle", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 25, Name = "County", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 26, Name = "Santafe", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 27, Name = "Sonata", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 28, Name = "Kartal SLX", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }                   
+                    new Manufacture { Id = 1, Name = "Single leg chain sling", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 2, Name = "Working platform", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 3, Name = "Hangcha", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 4, Name = "XCMG", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 5, Name = "Kalmar", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 6, Name = "Terberq", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 7, Name = "Sisu", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 8, Name = "Toyoto", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 9, Name = "Bobkat", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 10, Name = "Hyster", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 11, Name = "Boss", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 12, Name = "Ardelt", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 13, Name = "None", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 14, Name = "VDL", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 15, Name = "Sunny", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 16, Name = "Camry", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 17, Name = "Engine", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 18, Name = "023-2 №-li dizel generator", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 19, Name = "022-1 №-li dizel generator", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 20, Name = "021-TQM 23 B48-754", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 21, Name = "Service berth-N4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 22, Name = "Molino", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 23, Name = "Service berth-N3 ", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 24, Name = "Shackle", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 25, Name = "County", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 26, Name = "Santafe", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 27, Name = "Sonata", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Manufacture { Id = 28, Name = "Kartal SLX", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
 
                 );
             });
@@ -197,202 +200,231 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                   new EquipmentType { Id = 1, Name = "RS45-31CH", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 2, Name = "CPCD200-W36", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 3, Name = "CPCD100-W17", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 4, Name = "CPCD40-RC24", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 5, Name = "CPCD25N-RC2", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 6, Name = "CPCD15N-RC26", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 7, Name = "XT760", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 8, Name = "DRD420-60S5", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 9, Name = "DSD420-12CSG", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 10, Name = "T-1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 11, Name = "TV-10EIT-4x4/2600", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 12, Name = "FD-100F50", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 13, Name = "843", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 14, Name = "HS1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 15, Name = "B1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 16, Name = "FD-15", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 17, Name = "Kondor 1500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 18, Name = "QAY220 All Terrain Crane", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 19, Name = "None", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 20, Name = "Sokol 500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 21, Name = "Mobil Pnevmatik Transporter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 22, Name = "ST 1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 23, Name = "ST 2", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 24, Name = "ST 3", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 25, Name = "ST 4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 26, Name = "ST 4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 27, Name = "ST 5", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 28, Name = "ST 6", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 29, Name = "ST 7", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 30, Name = "ST 8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 31, Name = "ST 8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 32, Name = "ST 9", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 33, Name = "ST 10", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 34, Name = "Ferry Terminal", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 35, Name = "YT180-04", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 36, Name = "CH 6600", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 37, Name = "AM 140/76/36", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 38, Name = "VSG/020.0-2.2-6400", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 39, Name = "VSG/015.0.07.13500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 40, Name = "VSG/016.0-2.2-5000", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 41, Name = "VSG/020.0-0.7-17500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 42, Name = "Sabir Babayev yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 43, Name = "Ələt yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 44, Name = "Silkway yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 45, Name = "045-TQM 23 B - 48", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 46, Name = "046-MNMS-73", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 47, Name = "047-Şəfəq", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 48, Name = "048-Kür", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 49, Name = "049-Günəşli", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 50, Name = "050-Nüsrət Şirinov", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 51, Name = "051-Elxan Kazımov", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 52, Name = "052-Limançı", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 53, Name = "053-TQM 23 B48 - 2494", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 54, Name = "Nissan", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 55, Name = "Toyota", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 56, Name = "QAZ", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 57, Name = "HOWO", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 58, Name = "Fiat", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 59, Name = "111111", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 60, Name = "Vaz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 61, Name = "Tofash", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 62, Name = "Volkswagen", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 63, Name = "Hyundai", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 64, Name = "Mersedes Benz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 65, Name = "5 Tonne 5mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 66, Name = "5 Tonne 4mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 67, Name = "10 Tonne 5.5mtr x 32mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 68, Name = "15 Tonne 4mtr x 38mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 69, Name = "5 Tonne 3mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 70, Name = "8.6 Tonne 1.9mtr x26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 71, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 72, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 73, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 74, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 75, Name = "6.2 Tonne 10 mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 76, Name = "6.2 Tonne 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 77, Name = "077-5.1 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 78, Name = "078-5.1 Tonne 1.3 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 79, Name = "079-5.1 Tonne 2.93 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 80, Name = "080-10.1 Tonne 12 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 81, Name = "081-5 Tonne 8 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 82, Name = "082-8 Tonne 8 mtr x 26 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 83, Name = "083-10 Tonne 10 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 84, Name = "084-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 85, Name = "085-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 86, Name = "086-12 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 87, Name = "087-25 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 88, Name = "6.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 89, Name = "4.75 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 90, Name = "3.25 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 91, Name = "8.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 92, Name = "12 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 93, Name = "12.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 94, Name = "8 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 95, Name = "3 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 96, Name = "10 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 97, Name = "4064 Kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 98, Name = "5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 99, Name = "3 Tonne 1 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 100, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 101, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 102, Name = "3 Tonne 3 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 103, Name = "3 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 104, Name = "3 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 105, Name = "3 Tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 106, Name = "106-5 tonne 3 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 107, Name = "107-5 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 108, Name = "108-5 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 109, Name = "109-10 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 110, Name = "110-6 Tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 111, Name = "6 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 112, Name = "112-6 Tonne 10mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 113, Name = "113-14 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 114, Name = "114-15 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 115, Name = "115-136 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 116, Name = "116-30 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 117, Name = "117-Model: H2000/3 MFB", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 118, Name = "118-Model: KP 25", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 119, Name = "119-Model: 71022", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 120, Name = "120-2250 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 121, Name = "121-1.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 122, Name = "122-SİNGLE LİNE LANYARD", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 123, Name = "123-Takelaj sahəsi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 124, Name = "8 Tonne 8 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 125, Name = "8 Tonne 6mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 126, Name = "126- Qarmaq   KE-40", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 127, Name = "127-Qarmaq    KE-80", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 128, Name = "128-Qarmaq   KE-32", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 129, Name = "10 Tonee x 3 mtr x 28 dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 130, Name = "3 tonne x 1.5 mtr x 20 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 131, Name = "7 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 132, Name = "3 tonne x 1 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 133, Name = "10 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 134, Name = "10 tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 135, Name = "1 tonne 2mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 136, Name = "5 tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 137, Name = "8 Tonne 2mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 138, Name = "10 Tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 139, Name = "17 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 140, Name = "3.2 tonne x  3 mtr x 16 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 141, Name = "10 tonne x 5.5 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 142, Name = "10 tonne x 5 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 143, Name = "10 tonne x 4 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 144, Name = "10 Tonne x 6 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 145, Name = "6.2 Tonne x 3mtr x 22mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 146, Name = "6.2 Tonne x 5 mtr x 22mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 147, Name = "18.5 Tonne x 3 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 148, Name = "18.5 Tonne x 5 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 149, Name = "2 tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 150, Name = "1.74mtr x 4.24mtr x 1.32mtr - 300kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 151, Name = "400 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 152, Name = "18.5 Tonne x 8 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 153, Name = "10 Tonne x 12 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 154, Name = "5.3  Tonne x 15 mtr x 13 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 155, Name = "8 tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 156, Name = "85 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 157, Name = "35 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 158, Name = "9.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 159, Name = "13.5 tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 160, Name = "10 Tonne x 8 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 161, Name = "161-İnzibati bina CR-2 və qazanxan HB-1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 162, Name = "162-Ümumi yük terminalı binaları CR-7 , CR-9 , CR-8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 163, Name = "163-Texniki xidmət binaları CR-3, CR-4, CR-10, CR-15, CR-16, WS-3", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 164, Name = "164-RO-RO terminalı binaları CR-17, FS-5 , FS-10, FS-11, FS-16, FS-17, FS-18", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 166, Name = "166-DƏMİRYOLU binaları RM-1, RM-2 ,RM-4 ,RM-5, RM-6, RM- 7, RM-8, RM-13, RM-14, RM15, RM-16", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 167, Name = "167-Mühafizə xidməti binaları AB-1, AB-2, AB-7", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 168, Name = "142 tonne x 3,4 mtr x 56 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 169, Name = "50 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 170, Name = "300 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 171, Name = "4 tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 172, Name = "172-Abşeron Neft Terminalı binaları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 173, Name = "173-Abşeron Neft Terminalı hidrotexniki qurğuları 1 saylı körpü", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 174, Name = "174-Abşeron Neft Terminalı hidrotexniki qurğuları 3 saylı körpü", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 175, Name = "175-Dəniz vağzalı binası", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 176, Name = "176-Dəniz vağzalı hidrotexniki qurğuları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 177, Name = "177-İdarə binası və mədəniyyət evi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 178, Name = "178-Qaradağ mülki-müdafiə binaları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 179, Name = "179-Liman ərazisi yollar (Kargo , Ro-Ro , Bərə terminal)", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
+                   new Model { Id = 1, Name = "RS45-31CH", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 2, Name = "CPCD200-W36", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 3, Name = "CPCD100-W17", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 4, Name = "CPCD40-RC24", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 5, Name = "CPCD25N-RC2", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 6, Name = "CPCD15N-RC26", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 7, Name = "XT760", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 8, Name = "DRD420-60S5", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 9, Name = "DSD420-12CSG", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 10, Name = "T-1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 11, Name = "TV-10EIT-4x4/2600", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 12, Name = "FD-100F50", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 13, Name = "843", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 14, Name = "HS1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 15, Name = "B1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 16, Name = "FD-15", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 17, Name = "Kondor 1500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 18, Name = "QAY220 All Terrain Crane", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 19, Name = "None", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 20, Name = "Sokol 500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 21, Name = "Mobil Pnevmatik Transporter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 22, Name = "ST 1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 23, Name = "ST 2", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 24, Name = "ST 3", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 25, Name = "ST 4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 26, Name = "ST 4", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 27, Name = "ST 5", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 28, Name = "ST 6", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 29, Name = "ST 7", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 30, Name = "ST 8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 31, Name = "ST 8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 32, Name = "ST 9", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 33, Name = "ST 10", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 34, Name = "Ferry Terminal", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 35, Name = "YT180-04", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 36, Name = "CH 6600", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 37, Name = "AM 140/76/36", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 38, Name = "VSG/020.0-2.2-6400", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 39, Name = "VSG/015.0.07.13500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 40, Name = "VSG/016.0-2.2-5000", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 41, Name = "VSG/020.0-0.7-17500", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 42, Name = "Sabir Babayev yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 43, Name = "Ələt yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 44, Name = "Silkway yedək gəmisi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 45, Name = "045-TQM 23 B - 48", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 46, Name = "046-MNMS-73", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 47, Name = "047-Şəfəq", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 48, Name = "048-Kür", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 49, Name = "049-Günəşli", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 50, Name = "050-Nüsrət Şirinov", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 51, Name = "051-Elxan Kazımov", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 52, Name = "052-Limançı", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 53, Name = "053-TQM 23 B48 - 2494", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 54, Name = "Nissan", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 55, Name = "Toyota", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 56, Name = "QAZ", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 57, Name = "HOWO", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 58, Name = "Fiat", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 59, Name = "111111", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 60, Name = "Vaz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 61, Name = "Tofash", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 62, Name = "Volkswagen", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 63, Name = "Hyundai", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 64, Name = "Mersedes Benz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 65, Name = "5 Tonne 5mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 66, Name = "5 Tonne 4mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 67, Name = "10 Tonne 5.5mtr x 32mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 68, Name = "15 Tonne 4mtr x 38mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 69, Name = "5 Tonne 3mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 70, Name = "8.6 Tonne 1.9mtr x26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 71, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 72, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 73, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 74, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 75, Name = "6.2 Tonne 10 mtr x 22mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 76, Name = "6.2 Tonne 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 77, Name = "077-5.1 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 78, Name = "078-5.1 Tonne 1.3 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 79, Name = "079-5.1 Tonne 2.93 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 80, Name = "080-10.1 Tonne 12 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 81, Name = "081-5 Tonne 8 mtr x 20 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 82, Name = "082-8 Tonne 8 mtr x 26 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 83, Name = "083-10 Tonne 10 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 84, Name = "084-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 85, Name = "085-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 86, Name = "086-12 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 87, Name = "087-25 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 88, Name = "6.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 89, Name = "4.75 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 90, Name = "3.25 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 91, Name = "8.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 92, Name = "12 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 93, Name = "12.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 94, Name = "8 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 95, Name = "3 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 96, Name = "10 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 97, Name = "4064 Kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 98, Name = "5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 99, Name = "3 Tonne 1 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 100, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 101, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 102, Name = "3 Tonne 3 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 103, Name = "3 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 104, Name = "3 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 105, Name = "3 Tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 106, Name = "106-5 tonne 3 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 107, Name = "107-5 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 108, Name = "108-5 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 109, Name = "109-10 Tonne 5 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 110, Name = "110-6 Tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 111, Name = "6 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 112, Name = "112-6 Tonne 10mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 113, Name = "113-14 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 114, Name = "114-15 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 115, Name = "115-136 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 116, Name = "116-30 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 117, Name = "117-Model: H2000/3 MFB", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 118, Name = "118-Model: KP 25", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 119, Name = "119-Model: 71022", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 120, Name = "120-2250 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 121, Name = "121-1.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 122, Name = "122-SİNGLE LİNE LANYARD", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 123, Name = "123-Takelaj sahəsi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 124, Name = "8 Tonne 8 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 125, Name = "8 Tonne 6mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 126, Name = "126- Qarmaq   KE-40", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 127, Name = "127-Qarmaq    KE-80", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 128, Name = "128-Qarmaq   KE-32", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 129, Name = "10 Tonee x 3 mtr x 28 dia", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 130, Name = "3 tonne x 1.5 mtr x 20 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 131, Name = "7 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 132, Name = "3 tonne x 1 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 133, Name = "10 Tonne 6 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 134, Name = "10 tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 135, Name = "1 tonne 2mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 136, Name = "5 tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 137, Name = "8 Tonne 2mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 138, Name = "10 Tonne 10 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 139, Name = "17 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 140, Name = "3.2 tonne x  3 mtr x 16 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 141, Name = "10 tonne x 5.5 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 142, Name = "10 tonne x 5 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 143, Name = "10 tonne x 4 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 144, Name = "10 Tonne x 6 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 145, Name = "6.2 Tonne x 3mtr x 22mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 146, Name = "6.2 Tonne x 5 mtr x 22mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 147, Name = "18.5 Tonne x 3 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 148, Name = "18.5 Tonne x 5 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 149, Name = "2 tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 150, Name = "1.74mtr x 4.24mtr x 1.32mtr - 300kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 151, Name = "400 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 152, Name = "18.5 Tonne x 8 mtr x 38 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 153, Name = "10 Tonne x 12 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 154, Name = "5.3  Tonne x 15 mtr x 13 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 155, Name = "8 tonne 4 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 156, Name = "85 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 157, Name = "35 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 158, Name = "9.5 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 159, Name = "13.5 tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 160, Name = "10 Tonne x 8 mtr x 28 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 161, Name = "161-İnzibati bina CR-2 və qazanxan HB-1", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 162, Name = "162-Ümumi yük terminalı binaları CR-7 , CR-9 , CR-8", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 163, Name = "163-Texniki xidmət binaları CR-3, CR-4, CR-10, CR-15, CR-16, WS-3", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 164, Name = "164-RO-RO terminalı binaları CR-17, FS-5 , FS-10, FS-11, FS-16, FS-17, FS-18", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 166, Name = "166-DƏMİRYOLU binaları RM-1, RM-2 ,RM-4 ,RM-5, RM-6, RM- 7, RM-8, RM-13, RM-14, RM15, RM-16", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 167, Name = "167-Mühafizə xidməti binaları AB-1, AB-2, AB-7", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 168, Name = "142 tonne x 3,4 mtr x 56 mm", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 169, Name = "50 Tonne", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 170, Name = "300 kgs", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 171, Name = "4 tonne 2 mtr", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 172, Name = "172-Abşeron Neft Terminalı binaları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 173, Name = "173-Abşeron Neft Terminalı hidrotexniki qurğuları 1 saylı körpü", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 174, Name = "174-Abşeron Neft Terminalı hidrotexniki qurğuları 3 saylı körpü", IsDeleted = false, IsActive = true },
+                    new Model { Id = 175, Name = "175-Dəniz vağzalı binası", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 176, Name = "176-Dəniz vağzalı hidrotexniki qurğuları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 177, Name = "177-İdarə binası və mədəniyyət evi", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 178, Name = "178-Qaradağ mülki-müdafiə binaları", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Model { Id = 179, Name = "179-Liman ərazisi yollar (Kargo , Ro-Ro , Bərə terminal)", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
 
                 );
             });
+
 
             modelBuilder.Entity<Part>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new Part { Id = 1, Code = "OFL",  Name = "Oil Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // General
+                    new Part { Id = 1, Code = "OFL", Name = "Oil Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 2, Code = "AFL", Name = "Air Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 3, Code = "ENO", Name = "Engine Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 4, Code = "TRN", Name = "TransMission Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 5, Code = "GRB", Name = "Gear_Box Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 6, Code = "WHL", Name = "Wheels", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Part { Id = 7, Code = "ANF", Name = "Antifiriz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new Part { Id = 8, Code = "BRK", Name = "Break pads", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
-                );
+                    new Part { Id = 8, Code = "BRK", Name = "Break pads", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    // 🏗️AC-related
+                    new Part { Id = 9, Code = "ACF", Name = "AC Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 10, Code = "CMP", Name = "Compressor", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 11, Code = "CON", Name = "Condenser", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 12, Code = "RAD", Name = "Radiator", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // 🚛 Truck-related
+                    new Part { Id = 13, Code = "TRB", Name = "Turbocharger", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 14, Code = "CLT", Name = "Clutch Plate", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // 🏢 Building Systems
+                    new Part { Id = 15, Code = "FAN", Name = "Ventilation Fan", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 16, Code = "LGT", Name = "Lighting Panel", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // 🚆 Railway/Train
+                    new Part { Id = 17, Code = "TRK", Name = "Train Brake Shoe", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 18, Code = "RLS", Name = "Rail Lubricant System", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // 🚢 Vessel
+                    new Part { Id = 19, Code = "PRL", Name = "Propeller", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 20, Code = "ANC", Name = "Anchor Chain", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    // 🚗 Car
+                    new Part { Id = 21, Code = "SPK", Name = "Spark Plug", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 22, Code = "BTY", Name = "Battery", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 23, Code = "WPR", Name = "Wiper Blade", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
+                 );
             });
 
             modelBuilder.Entity<MaintenancePlan>(entity =>
@@ -403,7 +435,29 @@ namespace Persistence.Context
                     new MaintenancePlan { Id = 2, Code = "POCR-2", Name = "Portal Crane Prof", Description = "Profilaktik Inspection", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new MaintenancePlan { Id = 3, Code = "FRKL-1", Name = "Fork Lift", Description = "Vizual Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new MaintenancePlan { Id = 4, Code = "RAIL-1", Name = "Railway", Description = "Vizual Inspection of Railway", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new MaintenancePlan { Id = 5, Code = "FRKL-2", Name = "Fork Lift", Description = "Engine Oil Change", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
+                    new MaintenancePlan { Id = 5, Code = "FRKL-2", Name = "Fork Lift", Description = "Engine Oil Change", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+
+                    new MaintenancePlan { Id = 6, Code = "VSL-1", Name = "Vessel Monthly Maintenance", Description = "Oil Change + Filter Check + Cooling System Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 7, Code = "ACSYS-1", Name = "A/C System Quarterly Check", Description = "Compressor Inspection + Antifreeze Control + Filter Change", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 8, Code = "CAR-1", Name = "Vehicle 5K Maintenance", Description = "Engine Oil Change + Air Filter Replacement + Wiper Check", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 9, Code = "TRCK-1", Name = "Truck Service Pack A", Description = "Gear Oil + Brake Pads + Visual Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 10, Code = "BLD-1", Name = "Building HVAC Maintenance", Description = "Vent Fan Clean + Compressor Test + Filter Change", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 11, Code = "GEN-1", Name = "Generator Health Check", Description = "Oil Top-up + Coolant Inspection + Load Test", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 12, Code = "RLY-1", Name = "Railway Track Inspection", Description = "Track Alignment + Fastener Check + Clean Debris", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 13, Code = "CRNE-1", Name = "Crane Safety Inspection", Description = "Wire Rope Check + Brake Test + Load Limit Inspection", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 14, Code = "TUG-1", Name = "Tug Boat Pre-Sail Check", Description = "Anchor Inspection + Oil Levels + Navigation System Test", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 15, Code = "LDL-1", Name = "Loader Weekly Maintenance", Description = "Bucket Grease + Tire Pressure + Oil Level", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 16, Code = "CNTR-1", Name = "Container Spreader Maintenance", Description = "Lock Mechanism Test + Greasing + Cable Check", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 17, Code = "RRBRTH-1", Name = "Ro-Ro Berth Maintenance", Description = "Ramp Inspection + Support Beam Check + Debris Removal", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 18, Code = "FRYBRTH-1", Name = "Ferry Berth Check", Description = "Floatation System + Structural Visuals + Ladder Check", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 19, Code = "FENDR-1", Name = "Fender System Check", Description = "Rubber Wear + Bolt Tightness + Paint Protection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 20, Code = "MOB-CRN", Name = "Mobile Crane Full Service", Description = "Hydraulic Oil + Boom Inspection + Safety System", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 21, Code = "SLNG-1", Name = "Chain Sling Check", Description = "Link Crack Test + Length Verification + Cleaning", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 22, Code = "WHSPRD-1", Name = "Wheel Spreader Maintenance", Description = "Tire Rotation + Bearing Check + Alignment Test", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 23, Code = "CLMP-1", Name = "Plate Clamp Service", Description = "Spring Test + Handle Alignment + Lock Safety Check", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 24, Code = "DRMLFT-1", Name = "Drum Lifter Monthly Service", Description = "Drum Hook Check + Handle Tension + Weight Calibration", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new MaintenancePlan { Id = 25, Code = "ENGCHCK-1", Name = "Engine System Check", Description = "Engine Oil + Fuel Filter + Cooling System Flush", MetricType = Metrictype.MOTO_HOURS, MetricTypeName = "MotoHour", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
+
                 );
             });
 
@@ -415,7 +469,7 @@ namespace Persistence.Context
                     new Service { Id = 2, Name = "Engine Oil Filter", ServiceDescription = "Engine Oil filter change", ServiceType = "Replace", MaintenancePlanId = 5, IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Service { Id = 3, Name = "Engine Oil Change", ServiceDescription = "Engine Oil change", ServiceType = "Refill", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
                     new Service { Id = 4, Name = "Engine Oil Change", ServiceDescription = "Engine Oil change", ServiceType = "Refill", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
-             
+
 
 
                 );
@@ -425,7 +479,7 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new Equipment { Id = 1, Name = "ForkLift-1 ", IsIdle = true, UnitNumber = "FK-100000", Description = "Cargo Handling equipment", Identification = "no", ModelId=14, EquipmentTypeId=1, ManufactureId=10, DepartmentId = 1, OperationSiteid = 4, Status = EquipmentStatus.ACTIVE, usageLocation = Location.GARADAGH, ProductionYear = 1998, CreatedDate = DateTime.UtcNow, Capacity= "2000 ton", CurrentValue = 145,IsDeleted = false, IsActive = true, CreatedBy = "System", MpCompleted = true, ImagUrl= "forklift.jpeg" },
+                    new Equipment { Id = 1, Name = "ForkLift-1 ", IsIdle = true, UnitNumber = "FK-100000", Description = "Cargo Handling equipment", Identification = "no", ModelId = 14, EquipmentTypeId = 1, ManufactureId = 10, DepartmentId = 1, OperationSiteid = 4, Status = EquipmentStatus.ACTIVE, usageLocation = Location.GARADAGH, ProductionYear = 1998, CreatedDate = DateTime.UtcNow, Capacity = "2000 ton", CurrentValue = 145, IsDeleted = false, IsActive = true, CreatedBy = "System", MpCompleted = true, ImagUrl = "forklift.jpeg" },
                     new Equipment { Id = 2, Name = "ForkLift-2", IsIdle = true, UnitNumber = "FK-100001", Description = "Cargo Handling equipment", Identification = "no", ModelId = 13, EquipmentTypeId = 2, ManufactureId = 9, DepartmentId = 1, OperationSiteid = 3, Status = EquipmentStatus.ACTIVE, usageLocation = Location.GARADAGH, ProductionYear = 2004, CreatedDate = DateTime.UtcNow, Capacity = "4000 ton", CurrentValue = 450, IsDeleted = false, IsActive = true, CreatedBy = "System", MpCompleted = true, ImagUrl = "forklift.jpeg" },
                     new Equipment { Id = 3, Name = "Crane-3 ", IsIdle = true, UnitNumber = "CR-100003", Description = "Cargo Lifting equipment", Identification = "no", ModelId = 17, EquipmentTypeId = 4, ManufactureId = 4, DepartmentId = 1, OperationSiteid = 3, Status = EquipmentStatus.ACTIVE, usageLocation = Location.SUMGAYIT, ProductionYear = 2003, CreatedDate = DateTime.UtcNow, Capacity = "40000 ton", CurrentValue = 500, IsDeleted = false, IsActive = true, CreatedBy = "System", MpCompleted = true, ImagUrl = "forklift.jpeg" },
                     new Equipment { Id = 4, Name = "Buldozer-4 ", IsIdle = true, UnitNumber = "CR-100004", Description = "Cargo Lifting equipment", Identification = "no", ModelId = 17, EquipmentTypeId = 4, ManufactureId = 4, DepartmentId = 1, OperationSiteid = 6, Status = EquipmentStatus.ACTIVE, usageLocation = Location.SUMGAYIT, ProductionYear = 2010, CreatedDate = DateTime.UtcNow, Capacity = "80000 ton", CurrentValue = 320, IsDeleted = false, IsActive = true, CreatedBy = "System", MpCompleted = true, ImagUrl = "forklift.jpeg" },

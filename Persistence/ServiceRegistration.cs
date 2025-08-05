@@ -11,18 +11,21 @@ using Application.Repositories.ManufactureRepo;
 using Application.Repositories.ModelRepo;
 using Application.Repositories.MpRepo;
 using Application.Repositories.OperationSiteRepo;
+using Application.Repositories.PartRepo;
 using Application.Repositories.ServiceHistoryRepo;
 using Application.Repositories.ServiceRepo;
 using Application.Repositories.UsageHistoryRepo;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.Configuration;
+//using Persistence.Configuration;
 using Persistence.Context;
 using Persistence.Helper;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentMpRepo;
+using Persistence.Repositories.EquipmentPartRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Repositories.EquipmentTypeRepo;
 using Persistence.Repositories.MaintSettingRepo;
@@ -36,20 +39,21 @@ using Persistence.Repositories.ServiceRepo;
 using Persistence.Repositories.UsageHistoryRepo;
 using Persistence.Services;
 using Persistence.Services.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
 namespace Persistence
 {
     public static class ServiceRegistration
     {
-        public static void AddPersistenceService(this IServiceCollection services)
+        public static void AddPersistenceService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMemoryCache();
-            services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+            //services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+            services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(configuration.GetConnectionString("PostgreSQL")));
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 8;
@@ -102,8 +106,6 @@ namespace Persistence
             services.AddScoped<IReadOperationSiteRepository, OperationSiteReadRepository>();
             services.AddScoped<IWriteOperationSiteRepository, OperationSiteWriteRepository>();
 
-            services.AddScoped<IPartReadRepository, PartReadRepository>();
-            services.AddScoped<IPartWriteRepository, PartWriteRepository>();
 
             services.AddScoped<IEquipmentTypeReadRepository, EquipmentTypeReadRepository>();
             services.AddScoped<IEquipmentTypeWriteRepository, EquipmentTypeWriteRepository>();
@@ -114,7 +116,13 @@ namespace Persistence
             services.AddScoped<IServiceHistoryReadRepository, ServiceHistoryReadRepository>();
             services.AddScoped<IServiceHistoryWriteRepository, ServiceHistoryWriteRepository>();
 
-            
+            services.AddScoped<IPartReadRepository, PartReadRepository>();
+            services.AddScoped<IPartWriteRepository, PartWriteRepository>();
+
+            // ✅ EquipmentPart Repositories
+            services.AddScoped<IEquipmentPartReadRepository, EquipmentPartReadRepository>();
+            services.AddScoped<IEquipmentPartWriteRepository, EquipmentPartWriteRepository>();
+
 
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEquipmentService, EquipmentService>();

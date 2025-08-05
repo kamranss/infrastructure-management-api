@@ -69,7 +69,7 @@ namespace Application.Mapper.Profiles
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
-            CreateMap<EquipmentMaintenancePlan, EquipmentAndMp>();
+            CreateMap<EquipmentMaintenancePlan, EquipmentAndMpDto>();
 
 
             CreateMap<UsageHistory, UsageHistoryDto>().ReverseMap()

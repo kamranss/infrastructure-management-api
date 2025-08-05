@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories.PartRepo
 {
-    public interface IPartReadRepositoy:IReadRepository<Part>
+    public interface IPartReadRepository:IReadRepository<Part>
     {
     }
 }
